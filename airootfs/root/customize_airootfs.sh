@@ -7,7 +7,7 @@ locale-gen
 
 ln -sf /usr/share/zoneinfo/UTC /etc/localtime
 
-cp -aT /etc/skel/ /root/
+#cp -aT /etc/skel/ /root/
 
 # Permissions
 chmod 750 /root
@@ -88,3 +88,27 @@ expac -H M -s "%-30n %m" | sort -rhk 2 > /root/packages-size.txt
 
 # Generate HTML version of the manual
 markdown -o usr/share/sysrescue/index.html usr/share/sysrescue/index.md
+
+# 2021/01/30 : Modified by Olivier Sirol <czo@free.fr> 
+# date
+date > /root/czo@free.fr
+
+# mnt
+mkdir -p /mnt/sda1
+mkdir -p /mnt/sda2
+mkdir -p /mnt/sdb1
+mkdir -p /mnt/sdb2
+mkdir -p /mnt/sdc1
+mkdir -p /mnt/sdc2
+
+# config files
+cd /root
+wget -qO- http://git.io/JkHdk | sh
+
+# # Trust archzfs key bof
+# pacman-key --init
+# pacman-key -r DDF7DB817396A49B2A2723F7403BD972F75D9D76
+# pacman-key --lsign-key DDF7DB817396A49B2A2723F7403BD972F75D9D76
+# pacman -Sy
+
+
