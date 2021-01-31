@@ -68,6 +68,7 @@ _usage ()
 
 # Helper function to run make_*() only one time per architecture.
 run_once() {
+    echo "<==== ${work_dir}/build.${1}"
     if [[ ! -e ${work_dir}/build.${1} ]]; then
         $1
         touch ${work_dir}/build.${1}
@@ -237,7 +238,8 @@ make_prepare() {
 # Build ISO
 make_iso() {
     cp ${version_file} ${work_dir}/iso/${install_dir}/
-    setarch ${arch} mkarchiso ${verbose} -w "${work_dir}" -D "${install_dir}" -L "${iso_label}" -P "${iso_publisher}" -A "${iso_application}" -o "${out_dir}" iso "${iso_name}-${iso_version}-${arch/x86_64/amd64}.iso"
+    #setarch ${arch} mkarchiso ${verbose} -w "${work_dir}" -D "${install_dir}" -L "${iso_label}" -P "${iso_publisher}" -A "${iso_application}" -o "${out_dir}" iso "${iso_name}-${iso_version}-${arch/x86_64/amd64}.iso"
+    setarch ${arch} mkarchiso ${verbose} -w "${work_dir}" -D "${install_dir}" -L "${iso_label}" -P "${iso_publisher}" -A "${iso_application}" -o "${out_dir}" iso "czo-sysrcd-${iso_mainver//.}-${arch/x86_64/amd64}.iso"
 }
 
 if [[ ${EUID} -ne 0 ]]; then
