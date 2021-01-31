@@ -37,7 +37,8 @@ exfat-utils
 expac
 f2fs-tools
 featherpad
-firefox-esr-bin
+firefox
+firefox-ublock-origin
 flashrom
 foremost
 fsarchiver
@@ -50,10 +51,10 @@ gpart
 gparted
 gpm
 gptfdisk
-grml-zsh-config
 growpart
 grsync
 grub
+gvim
 hardinfo
 haveged
 hdparm
@@ -76,6 +77,7 @@ libvncserver
 linux-atm
 linux-firmware
 linux-lts
+linux-lts-headers
 localepurge
 lshw
 lsof
@@ -159,7 +161,6 @@ unzip
 usb_modeswitch
 usbutils
 vi
-vim
 vpnc
 wget
 whdd
@@ -176,7 +177,11 @@ xfce4
 xfce4-battery-plugin
 xfce4-pulseaudio-plugin
 xfce4-screenshooter
+xfce4-systemload-plugin
 xfce4-taskmanager
+xfce4-terminal
+xfce4-whiskermenu-plugin
+xfce4-xkb-plugin
 xfsdump
 xfsprogs
 xkbsel
@@ -189,6 +194,7 @@ xorg-xinit
 yubikey-manager
 yubikey-personalization-gui
 zerofree
+zfs-dkms
 zile
 zip
 zsh
