@@ -1,12 +1,13 @@
 # SystemRescue
 
-## czo-sysrcd
+## My czo-sysrcd
 This is my fork of SystemRescue. 
 https://gitlab.com/czo/systemrescue-sources
 
-This is an SystemRescue with zfs + 3ware raid binaries and my config file.
+This is an SystemRescue with zfs + 3ware raid binaries + my config file.
 Xfce has its whisker menu and its xfce4-xkb-plugin. It has firefox (no-esr)
-and firefox-ublock-origin
+and firefox-ublock-origin.
+It works on amd64.
 
 ## Project website
 Homepage: https://www.system-rescue.org/
