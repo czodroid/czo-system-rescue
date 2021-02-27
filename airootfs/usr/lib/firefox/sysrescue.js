@@ -12,5 +12,5 @@ pref("browser.EULA.override", true);
 pref("browser.startup.homepage_override.mstone", "ignore");
 pref("browser.startup.homepage", "http://www.system-rescue.org/");
 // NO title
-user_pref("browser.tabs.drawInTitlebar", true);
+pref("browser.tabs.drawInTitlebar", true);
 
