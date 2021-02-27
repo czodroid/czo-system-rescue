@@ -1,4 +1,5 @@
 \e[01;31m ========= \e[01;37mSystemRescue %ISO_VERSION% (%ISO_ARCH%)\e[01;31m ======== \e[01;37m\l\e[00;37m/6\e[01;31m =========
+
                     \e[00;31mhttps://www.system-rescue.org/
                     
         2019/10/10 : Modified by Olivier Sirol <czo@free.fr>
@@ -8,4 +9,7 @@
 
 \e[00;31m*\e[01;31m Graphical environment\e[00;37m :
    Type \e[01;37mstartx\e[00;37m to run the graphical environment
+
+\e[00;31m*\e[01;31m Change cowspace\e[00;37m :
+   mount -o remount,size=1G /run/archiso/cowspace
 
