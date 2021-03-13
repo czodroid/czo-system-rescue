@@ -74,7 +74,20 @@
       <property name="display-name" type="uint" value="0"/>
       <property name="group-policy" type="uint" value="0"/>
     </property>
-    <property name="plugin-23" type="string" value="systemload"/>
+    <property name="plugin-23" type="string" value="systemload">
+      <property name="memory" type="empty">
+        <property name="label" type="string" value=""/>
+      </property>
+      <property name="cpu" type="empty">
+        <property name="label" type="string" value=""/>
+      </property>
+      <property name="swap" type="empty">
+        <property name="label" type="string" value=""/>
+      </property>
+      <property name="uptime" type="empty">
+        <property name="enabled" type="bool" value="false"/>
+      </property>
+    </property>
     <property name="plugin-1" type="string" value="whiskermenu"/>
     <property name="plugin-3" type="string" value="launcher">
       <property name="items" type="array">
