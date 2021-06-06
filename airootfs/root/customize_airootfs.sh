@@ -18,6 +18,7 @@ sed -i 's/#\(PermitRootLogin \).\+/\1yes\nAllowUsers root/' /etc/ssh/sshd_config
 sed -i 's/#\(PermitEmptyPasswords \).\+/\1no/' /etc/ssh/sshd_config
 sed -i "s/#Server/Server/g" /etc/pacman.d/mirrorlist
 sed -i 's/#\(Storage=\)auto/\1volatile/' /etc/systemd/journald.conf
+sed -i 's/#\(Audit=\)yes/\1no/' /etc/systemd/journald.conf
 
 sed -i 's/#\(HandleSuspendKey=\)suspend/\1ignore/' /etc/systemd/logind.conf
 sed -i 's/#\(HandleHibernateKey=\)hibernate/\1ignore/' /etc/systemd/logind.conf
@@ -60,8 +61,8 @@ rm -rf /usr/include
 rm -rf /usr/share/man/man3
 
 # Cleanup XFCE menu
-sed -i '2 i NoDisplay=true' /usr/share/applications/{xfce4-mail-reader,xfce4-web-browser,jmacs,jpico,jstar}.desktop
-sed -i "s/^\(Categories=\).*\$/Categories=Utility;/" /usr/share/applications/{geany,joe,jmacs,jpico,jstar,ristretto,*GHex*}.desktop
+sed -i '2 i NoDisplay=true' /usr/share/applications/{xfce4-mail-reader,xfce4-web-browser}.desktop
+sed -i "s/^\(Categories=\).*\$/Categories=Utility;/" /usr/share/applications/{geany,ristretto,*GHex*}.desktop
 
 # Remove large/irrelevant firmwares
 rm -rf /usr/lib/firmware/{liquidio,netronome,mellanox,mrvl/prestera}
@@ -95,11 +96,7 @@ date > /root/czo@free.fr
 
 # mnt
 mkdir -p /mnt/sda1
-mkdir -p /mnt/sda2
 mkdir -p /mnt/sdb1
-mkdir -p /mnt/sdb2
-mkdir -p /mnt/sdc1
-mkdir -p /mnt/sdc2
 
 # config files
 cd /root

@@ -2,7 +2,7 @@
 
 ## My czo-sysrcd
 This is my fork of SystemRescue. 
-https://gitlab.com/czo/systemrescue-sources
+https://gitlab.com/czo/czo-sysrcd
 
 This is an SystemRescue with zfs + 3ware raid binaries + my config file.
 Xfce has its whisker menu and its xfce4-xkb-plugin. It has firefox (no-esr)
@@ -38,3 +38,10 @@ custom packages can be accessed.
 The build process can be started by running the build.sh script. It will create
 a large "work" sub-directory and the ISO file will be written in the "out"
 sub-directory.
+
+## Including your SystemRescueModules
+If you want to include your own [SystemRescueModules][srm], place their srm files
+in the [srm](./srm) directory of the repository before running the build script.
+
+[srm]: https://www.system-rescue.org/Modules/
+

@@ -28,11 +28,13 @@ case ${arch} in
         efiarch="x86_64-efi"
         efiboot="bootx64.efi"
         edk2arch="x64"
+        mirrorlist_url='https://archlinux.org/mirrorlist/?country=all&protocol=http&use_mirror_status=on'
         ;;
     i686)
         efiarch="i386-efi"
         efiboot="bootia32.efi"
         edk2arch="ia32"
+        mirrorlist_url='https://archlinux32.org/mirrorlist/?country=all&protocol=http&use_mirror_status=on'
         ;;
     *)
         echo "ERROR: Unsupported architecture: '${arch}'"
@@ -106,7 +108,7 @@ make_customize_airootfs() {
          s|%INSTALL_DIR%|${install_dir}|g" \
          ${script_path}/airootfs/etc/issue > ${work_dir}/${arch}/airootfs/etc/issue
 
-    curl -o ${work_dir}/${arch}/airootfs/etc/pacman.d/mirrorlist 'https://archlinux.org/mirrorlist/?country=all&protocol=http&use_mirror_status=on'
+    curl -o ${work_dir}/${arch}/airootfs/etc/pacman.d/mirrorlist "$mirrorlist_url"
 
     setarch ${arch} mkarchiso ${verbose} -w "${work_dir}/${arch}" -C "${work_dir}/pacman.conf" -D "${install_dir}" -r '/root/customize_airootfs.sh' run
     rm -f ${work_dir}/${arch}/airootfs/root/customize_airootfs.sh
@@ -239,7 +241,13 @@ make_prepare() {
 make_iso() {
     date > ${work_dir}/iso/czo@free.fr
     cp ${version_file} ${work_dir}/iso/${install_dir}/
-    #setarch ${arch} mkarchiso ${verbose} -w "${work_dir}" -D "${install_dir}" -L "${iso_label}" -P "${iso_publisher}" -A "${iso_application}" -o "${out_dir}" iso "${iso_name}-${iso_version}-${arch/x86_64/amd64}.iso"
+    (
+        shopt -s nullglob
+        rm -vf ${work_dir}/iso/${install_dir}/*.srm
+        for srm in srm/*.srm; do
+            cp -vf "$srm" ${work_dir}/iso/${install_dir}/
+        done
+    )
     setarch ${arch} mkarchiso ${verbose} -w "${work_dir}" -D "${install_dir}" -L "${iso_label}" -P "${iso_publisher}" -A "${iso_application}" -o "${out_dir}" iso "czo-sysrcd-${iso_mainver//.}.iso"
 }
 

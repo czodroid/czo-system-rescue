@@ -35,6 +35,7 @@ elinks
 ethtool
 exfatprogs
 expac
+ext4magic
 f2fs-tools
 featherpad
 firefox
@@ -54,6 +55,7 @@ gptfdisk
 growpart
 grsync
 grub
+gsmartcontrol
 gvim
 hardinfo
 hdparm
@@ -69,7 +71,6 @@ ipw2100-fw
 ipw2200-fw
 irssi
 jfsutils
-joe
 keepassxc
 lftp
 libvncserver
@@ -171,6 +172,7 @@ wireless_tools
 wpa_supplicant
 wvdial
 xarchiver
+xfburn
 xfce4
 xfce4-battery-plugin
 xfce4-pulseaudio-plugin

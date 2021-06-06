@@ -1,7 +1,7 @@
 \e[01;31m ========= \e[01;37mSystemRescue %ISO_VERSION% (%ISO_ARCH%)\e[01;31m ======== \e[01;37m\l\e[00;37m/6\e[01;31m =========
 
-                    \e[00;31mhttps://www.system-rescue.org/
-                    
+                 \e[00;31mhttps://gitlab.com/czo/czo-sysrcd
+
         2019/10/10 : Modified by Olivier Sirol <czo@free.fr>
 
 \e[00;31m*\e[01;31m Console environment\e[00;37m :
