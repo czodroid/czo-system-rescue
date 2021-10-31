@@ -52,7 +52,7 @@ gpart
 gparted
 gpm
 gptfdisk
-growpart
+growpartfs
 grsync
 grub
 gsmartcontrol
