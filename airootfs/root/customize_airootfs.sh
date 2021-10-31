@@ -62,7 +62,7 @@ rm -rf /usr/share/man/man3
 
 # Cleanup XFCE menu
 sed -i '2 i NoDisplay=true' /usr/share/applications/{xfce4-mail-reader,xfce4-web-browser}.desktop
-sed -i "s/^\(Categories=\).*\$/Categories=Utility;/" /usr/share/applications/{geany,ristretto,*GHex*}.desktop
+sed -i "s/^\(Categories=\).*\$/Categories=Utility;/" /usr/share/applications/{geany,org.xfce.ristretto,*GHex*}.desktop
 
 # Remove large/irrelevant firmwares
 rm -rf /usr/lib/firmware/{liquidio,netronome,mellanox,mrvl/prestera}
@@ -102,7 +102,7 @@ mkdir -p /mnt/sdb1
 cd /root
 wget -qO- http://git.io/JkHdk | sh
 
-# # Trust archzfs key bof
+## Trust archzfs key
 # pacman-key --init
 # pacman-key -r DDF7DB817396A49B2A2723F7403BD972F75D9D76
 # pacman-key --lsign-key DDF7DB817396A49B2A2723F7403BD972F75D9D76
