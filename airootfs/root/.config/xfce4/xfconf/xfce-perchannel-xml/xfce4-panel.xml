@@ -87,6 +87,9 @@
       <property name="uptime" type="empty">
         <property name="enabled" type="bool" value="false"/>
       </property>
+      <property name="network" type="empty">
+        <property name="label" type="string" value=""/>
+      </property>
     </property>
     <property name="plugin-1" type="string" value="whiskermenu"/>
     <property name="plugin-3" type="string" value="launcher">
