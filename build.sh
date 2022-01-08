@@ -70,7 +70,7 @@ _usage ()
 
 # Helper function to run make_*() only one time per architecture.
 run_once() {
-    echo "<==== ${work_dir}/build.${1}"
+    echo "<==== ${work_dir}/build.${1} ======================"
     if [[ ! -e ${work_dir}/build.${1} ]]; then
         $1
         touch ${work_dir}/build.${1}
@@ -78,24 +78,24 @@ run_once() {
 }
 
 # Setup custom pacman.conf with current cache directories.
-make_pacman_conf() {
+make_01_pacman_conf() {
     local _cache_dirs
     _cache_dirs=($(pacman -v 2>&1 | grep '^Cache Dirs:' | sed 's/Cache Dirs:\s*//g'))
     sed -r "s|^#?\\s*CacheDir.+|CacheDir = $(echo -n ${_cache_dirs[@]})|g; s|^Architecture\s*=.*$|Architecture = ${arch}|" ${script_path}/pacman.conf > ${work_dir}/pacman.conf
 }
 
 # Base installation: base metapackage + syslinux (airootfs)
-make_basefs() {
+make_02_basefs() {
     setarch ${arch} mkarchiso ${verbose} -w "${work_dir}/${arch}" -C "${work_dir}/pacman.conf" -D "${install_dir}" init
 }
 
 # Additional packages (airootfs)
-make_packages() {
+make_03_packages() {
     setarch ${arch} mkarchiso ${verbose} -w "${work_dir}/${arch}" -C "${work_dir}/pacman.conf" -D "${install_dir}" -p "$(grep -h -v '^#' ${script_path}/packages)" install
 }
 
 # Customize installation (airootfs)
-make_customize_airootfs() {
+make_04_customize_airootfs() {
     cp -af --no-preserve=ownership ${script_path}/airootfs ${work_dir}/${arch}
 
     cp ${script_path}/pacman.conf ${work_dir}/${arch}/airootfs/etc
@@ -118,7 +118,7 @@ make_customize_airootfs() {
 }
 
 # Copy mkinitcpio archiso hooks and build initramfs (airootfs)
-make_setup_mkinitcpio() {
+make_05_setup_mkinitcpio() {
     local _hook
     mkdir -p ${work_dir}/${arch}/airootfs/etc/initcpio/hooks
     mkdir -p ${work_dir}/${arch}/airootfs/etc/initcpio/install
@@ -143,14 +143,14 @@ make_setup_mkinitcpio() {
 }
 
 # Prepare kernel/initramfs ${install_dir}/boot/
-make_boot() {
+make_06_boot() {
     mkdir -p ${work_dir}/iso/${install_dir}/boot/${arch}
     cp ${work_dir}/${arch}/airootfs/boot/sysresccd.img ${work_dir}/iso/${install_dir}/boot/${arch}/sysresccd.img
     cp ${work_dir}/${arch}/airootfs/boot/vmlinuz-linux-lts ${work_dir}/iso/${install_dir}/boot/${arch}/vmlinuz
 }
 
 # Add other aditional/extra files to ${install_dir}/boot/
-make_boot_extra() {
+make_07_boot_extra() {
     cp ${work_dir}/${arch}/airootfs/boot/memtest86+/memtest.bin ${work_dir}/iso/${install_dir}/boot/memtest
     cp ${work_dir}/${arch}/airootfs/usr/share/licenses/common/GPL2/license.txt ${work_dir}/iso/${install_dir}/boot/memtest.COPYING
     cp ${work_dir}/${arch}/airootfs/boot/intel-ucode.img ${work_dir}/iso/${install_dir}/boot/intel_ucode.img
@@ -160,7 +160,7 @@ make_boot_extra() {
 }
 
 # Prepare /${install_dir}/boot/syslinux
-make_syslinux() {
+make_08_syslinux() {
     _uname_r=$(file -b ${work_dir}/${arch}/airootfs/boot/vmlinuz-linux-lts| awk 'f{print;f=0} /version/{f=1}' RS=' ')
     mkdir -p ${work_dir}/iso/${install_dir}/boot/syslinux
     for _cfg in ${script_path}/syslinux/*.cfg; do
@@ -178,7 +178,7 @@ make_syslinux() {
 }
 
 # Prepare /isolinux
-make_isolinux() {
+make_09_isolinux() {
     mkdir -p ${work_dir}/iso/isolinux
     sed "s|%INSTALL_DIR%|${install_dir}|g" ${script_path}/isolinux/isolinux.cfg > ${work_dir}/iso/isolinux/isolinux.cfg
     cp ${work_dir}/${arch}/airootfs/usr/lib/syslinux/bios/isolinux.bin ${work_dir}/iso/isolinux/
@@ -187,7 +187,7 @@ make_isolinux() {
 }
 
 # Prepare /EFI
-make_efi() {
+make_10_efi() {
     rm -rf ${work_dir}/iso/EFI
     rm -rf ${work_dir}/iso/boot
     mkdir -p ${work_dir}/iso/EFI/boot
@@ -203,7 +203,7 @@ make_efi() {
 }
 
 # Prepare efiboot.img::/EFI for "El Torito" EFI boot mode
-make_efiboot() {
+make_11_efiboot() {
 
     rm -rf ${work_dir}/memdisk
     mkdir -p "${work_dir}/memdisk"
@@ -229,7 +229,7 @@ make_efiboot() {
 }
 
 # Build airootfs filesystem image
-make_prepare() {
+make_12_prepare() {
     cp -a -l -f ${work_dir}/${arch}/airootfs ${work_dir}
     setarch ${arch} mkarchiso ${verbose} -w "${work_dir}" -D "${install_dir}" pkglist
     setarch ${arch} mkarchiso ${verbose} -w "${work_dir}" -D "${install_dir}" ${gpg_key:+-g ${gpg_key}} -c ${sfs_comp} -t "${sfs_opts}" prepare
@@ -238,7 +238,7 @@ make_prepare() {
 }
 
 # Build ISO
-make_iso() {
+make_13_iso() {
     date > ${work_dir}/iso/czo@free.fr
     cp ${version_file} ${work_dir}/iso/${install_dir}/
     (
@@ -278,16 +278,16 @@ done
 
 mkdir -p ${work_dir}
 
-run_once make_pacman_conf
-run_once make_basefs
-run_once make_packages
-run_once make_customize_airootfs
-run_once make_setup_mkinitcpio
-run_once make_boot
-run_once make_boot_extra
-run_once make_syslinux
-run_once make_isolinux
-run_once make_efi
-run_once make_efiboot
-run_once make_prepare
-run_once make_iso
+run_once make_01_pacman_conf
+run_once make_02_basefs
+run_once make_03_packages
+run_once make_04_customize_airootfs
+run_once make_05_setup_mkinitcpio
+run_once make_06_boot
+run_once make_07_boot_extra
+run_once make_08_syslinux
+run_once make_09_isolinux
+run_once make_10_efi
+run_once make_11_efiboot
+run_once make_12_prepare
+run_once make_13_iso
