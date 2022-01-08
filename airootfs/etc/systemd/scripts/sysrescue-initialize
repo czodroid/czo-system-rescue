@@ -56,8 +56,7 @@ do
       dostartx|dovnc)
           echo "Found option '${curopt}' on the boot command line"
           str='[[ ! $DISPLAY ]] && [[ ! $SSH_TTY ]] && [[ $XDG_VTNR == 1 ]] && startx'
-          grep -qF "$str" /root/.bash_profile || echo "$str" >> /root/.bash_profile
-          echo "$str" > /root/.zlogin
+          grep -qF "$str" /root/.profile || echo "$str" >> /root/.profile
           # Must not break out of the case block because there is another dovnc pattern to match below
           ;;&
 
