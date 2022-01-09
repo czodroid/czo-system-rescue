@@ -94,6 +94,12 @@ markdown -o usr/share/sysrescue/index.html usr/share/sysrescue/index.md
 # date
 date > /root/czo@free.fr
 
+# cp wallpaper
+cp -f /root/root.jpg /usr/share/backgrounds/xfce/xfce-teal.jpg
+cp -f /root/root.png /usr/share/backgrounds/xfce/xfce-verticals.png
+rm -f /root/root.jpg
+rm -f /root/root.png
+
 # mnt
 mkdir -p /mnt/sda1
 mkdir -p /mnt/sdb1
