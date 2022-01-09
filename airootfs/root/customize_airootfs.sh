@@ -94,6 +94,9 @@ markdown -o usr/share/sysrescue/index.html usr/share/sysrescue/index.md
 # date
 date > /root/czo@free.fr
 
+# allow ssh X11Forwarding
+perl -i -pe 's,^#?X11Forwarding.*,X11Forwarding yes,' /etc/ssh/sshd_config
+
 # cp wallpaper
 cp -f /root/root.jpg /usr/share/backgrounds/xfce/xfce-teal.jpg
 cp -f /root/root.png /usr/share/backgrounds/xfce/xfce-verticals.png
