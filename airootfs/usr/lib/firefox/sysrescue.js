@@ -18,16 +18,16 @@ pref("browser.tabs.drawInTitlebar", true);
 pref("browser.tabs.inTitlebar", 1);
 // url bar room + home
 pref("browser.uiCustomization.state", "{\"placements\":{\"widget-overflow-fixed-list\":[\"fxa-toolbar-menu-button\",\"sidebar-button\",\"screenshot-button\",\"save-to-pocket-button\",\"ublock0_raymondhill_net-browser-action\",\"_d07ccf11-c0cd-4938-a265-2a4d6ad01189_-browser-action\"],\"nav-bar\":[\"back-button\",\"forward-button\",\"stop-reload-button\",\"home-button\",\"urlbar-container\",\"downloads-button\"],\"toolbar-menubar\":[\"menubar-items\"],\"TabsToolbar\":[\"tabbrowser-tabs\",\"new-tab-button\",\"alltabs-button\"],\"PersonalToolbar\":[\"personal-bookmarks\"]},\"seen\":[\"save-to-pocket-button\",\"ublock0_raymondhill_net-browser-action\",\"developer-button\",\"_d07ccf11-c0cd-4938-a265-2a4d6ad01189_-browser-action\"],\"dirtyAreaCache\":[\"nav-bar\",\"PersonalToolbar\",\"widget-overflow-fixed-list\",\"toolbar-menubar\",\"TabsToolbar\"],\"currentVersion\":17,\"newElementCount\":4}");
-// DuckDuckGo search
-pref("browser.urlbar.placeholderName", "DuckDuckGo");
-// no import bookmarks
-pref("browser.bookmarks.addedImportButton", true);
-pref("browser.bookmarks.restore_default_bookmarks", false);
+// bookmarks
+//pref("browser.bookmarks.addedImportButton", true);
+//pref("browser.bookmarks.restore_default_bookmarks", false);
+pref("browser.toolbars.bookmarks.visibility", "never");
 // strict contentblocking
 pref("browser.contentblocking.category", "strict");
 // cookie and history lost on close
 pref("network.cookie.lifetimePolicy", 2);
 pref("privacy.history.custom", true);
 pref("privacy.sanitize.sanitizeOnShutdown", true);
-
+// DuckDuckGo search (doesn't work...)
+//pref("browser.urlbar.placeholderName", "DuckDuckGo");
 

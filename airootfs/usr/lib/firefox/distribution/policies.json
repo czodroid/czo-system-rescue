@@ -2,9 +2,6 @@
   "policies": {
     "DisableAppUpdate": true,
     "DisableFirefoxStudies": true,
-    "DisableTelemetry": true,
-    "SearchEngines": {
-      "Default": "DuckDuckGo"
-    }
+    "DisableTelemetry": true
   }
 }
