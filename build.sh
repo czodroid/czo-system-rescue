@@ -146,6 +146,7 @@ make_05_setup_mkinitcpio() {
 make_06_boot() {
     mkdir -p ${work_dir}/iso/${install_dir}/boot/${arch}
     cp ${work_dir}/${arch}/airootfs/boot/sysresccd.img ${work_dir}/iso/${install_dir}/boot/${arch}/sysresccd.img
+    chmod 644 ${work_dir}/iso/${install_dir}/boot/${arch}/sysresccd.img
     cp ${work_dir}/${arch}/airootfs/boot/vmlinuz-linux-lts ${work_dir}/iso/${install_dir}/boot/${arch}/vmlinuz
 }
 
