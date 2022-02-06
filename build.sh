@@ -9,6 +9,7 @@ iso_name=systemrescue
 iso_version="$(<${version_file})"
 iso_mainver="${iso_version%-*}"
 iso_label="RESCUE${iso_mainver//.}"
+iso_date="$(date +%Y-%m-%d)"
 iso_publisher="SystemRescue <http://www.system-rescue.org>"
 iso_application="SystemRescue"
 install_dir=sysresccd
@@ -104,6 +105,7 @@ make_04_customize_airootfs() {
 
     sed "s|%ARCHISO_LABEL%|${iso_label}|g;
          s|%ISO_VERSION%|${iso_version}|g;
+         s|%ISO_DATE%|${iso_date}|g;
          s|%ISO_ARCH%|${arch}|g;
          s|%INSTALL_DIR%|${install_dir}|g" \
          ${script_path}/airootfs/etc/issue > ${work_dir}/${arch}/airootfs/etc/issue
@@ -167,6 +169,7 @@ make_08_syslinux() {
     for _cfg in ${script_path}/syslinux/*.cfg; do
         sed "s|%ARCHISO_LABEL%|${iso_label}|g;
              s|%ISO_VERSION%|${iso_version}|g;
+             s|%ISO_DATE%|${iso_date}|g;
              s|%ISO_ARCH%|${arch}|g;
              s|%INSTALL_DIR%|${install_dir}|g" ${_cfg} > ${work_dir}/iso/${install_dir}/boot/syslinux/${_cfg##*/}
     done
@@ -197,6 +200,7 @@ make_10_efi() {
     cp ${script_path}/efiboot/grub/font.pf2 ${work_dir}/iso/boot/grub/
     sed "s|%ARCHISO_LABEL%|${iso_label}|g;
          s|%ISO_VERSION%|${iso_version}|g;
+         s|%ISO_DATE%|${iso_date}|g;
          s|%ISO_ARCH%|${arch}|g;
          s|%INSTALL_DIR%|${install_dir}|g" \
          ${script_path}/efiboot/grub/grubsrcd.cfg > ${work_dir}/iso/boot/grub/grubsrcd.cfg
