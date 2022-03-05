@@ -59,11 +59,13 @@ grsync
 grub
 gsmartcontrol
 gvim
+hardinfo
 hdparm
 hexedit
 htop
 hwinfo
 iftop
+inetutils
 intel-ucode
 iotop
 iperf3
@@ -101,6 +103,7 @@ mtr
 nano
 nbd
 ncdu
+net-tools
 ndisc6
 network-manager-applet
 networkmanager-openvpn
