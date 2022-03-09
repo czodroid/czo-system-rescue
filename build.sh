@@ -253,7 +253,7 @@ make_13_iso() {
             cp -vf "$srm" ${work_dir}/iso/${install_dir}/
         done
     )
-    setarch ${arch} mkarchiso ${verbose} -w "${work_dir}" -D "${install_dir}" -L "${iso_label}" -P "${iso_publisher}" -A "${iso_application}" -o "${out_dir}" iso "czo-sysrcd-${iso_mainver//.}.iso"
+    setarch ${arch} mkarchiso ${verbose} -w "${work_dir}" -D "${install_dir}" -L "${iso_label}" -P "${iso_publisher}" -A "${iso_application}" -o "${out_dir}" iso "czo-rescue-${iso_mainver//.}.iso"
 }
 
 if [[ ${EUID} -ne 0 ]]; then
