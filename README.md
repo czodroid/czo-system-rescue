@@ -4,7 +4,7 @@
 
 This is my fork of SystemRescue with ZFS. 
 
-https://gitlab.com/czo/czo-sysrsq
+https://gitlab.com/czo/czo-rescue
 
 It's a SystemRescue with zfs binaries + 3ware raid + 
 my configuration files.
