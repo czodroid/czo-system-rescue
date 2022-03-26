@@ -1,6 +1,6 @@
 \e[01;31m ========= \e[01;37mSystemRescue %ISO_VERSION% (%ISO_DATE%)\e[01;31m ======== \e[01;37m\l\e[00;37m/6\e[01;31m =========
 
-                 \e[00;31mhttps://gitlab.com/czo/czo-sysrcd
+                 \e[00;31mhttps://gitlab.com/czo/czo-rescue
 
 \e[00;31m*\e[01;31m Console environment\e[00;37m :
    Run \e[01;37msetkmap\e[00;37m to choose the keyboard layout
