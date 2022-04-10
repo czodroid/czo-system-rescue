@@ -2,6 +2,53 @@ SystemRescue ChangeLog
 ======================
 
 -------------------------------------------------------------------------------
+9.02 (2022-04-09):
+-------------------------------------------------------------------------------
+* Updated the kernel to the Long-Term-Supported linux-5.15.32
+* Add script and config.yaml parameter for late-loading of SystemRescueModules (SRM) (Gerd v. Egidy)
+* Fix the type of the default definition of parameter "ar_attempts" (#266)
+* Added scripts and documentation to help build the ISO image in a docker container
+* Reduce compression ratio for initramfs on i686 to prevent a crash at build time (#261)
+* Updated disk utilities: GParted-1.4.0 and partclone-0.3.19
+
+-------------------------------------------------------------------------------
+9.01 (2022-02-10):
+-------------------------------------------------------------------------------
+* Updated the kernel to the Long-Term-Supported linux-5.15.22
+* Support for adding Certification Authorities (CAs) via YAML config (Gerd v. Egidy)
+* Uncompress kernel modules so the squashfs compression provides a better ratio (#247)
+* Optimized the initramfs compression to reduce the size of the ISO (Gerd v. Egidy)
+* Added development build option: faster build times but lower compression (Gerd v. Egidy)
+* Remove Q-Logic Fibrechannel/Infiniband HBA firmware to save space (#256)
+* Implemented a script to determine the effective configuration from yaml files (#251)
+* Added boot option 'sysrescuecfg' to control how the configuration is loaded (#254)
+* Added support for loading remote yaml configuration files over http/https (#254)
+* Allow all kinds of scripts to be used for autorun, not just /bin/sh (Gerd v. Egidy)
+
+-------------------------------------------------------------------------------
+9.00 (2022-01-16):
+-------------------------------------------------------------------------------
+* Updated the kernel to the Long-Term-Supported linux-5.15.14
+* The new kernel brings the ntfs3 module which provides better NTFS support
+* The system comes with a copy of the website as an offline manual (Gerd v. Egidy)
+* Added sysrescue-customize script to create custom ISO images (Gerd v. Egidy)
+* Initial support for configuring the system with YAML files (#170)
+* Support for configuring autorun with the new YAML configuration files
+* Replaced the mesa package with a minimal alternative to save 52MB (#241)
+* Converted the bash system initialisation script to python (#170)
+* Removed XOrg driver "xf86-video-qxl" as it is currently not stable (#235)
+* Bring back accidently removed package inetutils (telnet, ftp, hostname,...)
+* Added packages: aq, libisoburn, patch, python-llfuse, python-yaml, rdiff-backup
+
+-------------------------------------------------------------------------------
+8.07 (2021-12-19):
+-------------------------------------------------------------------------------
+* Updated kernel to the Long-Term-Supported linux-5.10.87
+* Pacman uses snapshot repository to ease installation of packages (Gerd v. Egidy)
+* Boot with "iomem=relaxed" by default as flashrom requires it (Gerd v. Egidy)
+* Added packages: net-tools, cronie, at, archinstall, wqy-microhei
+
+-------------------------------------------------------------------------------
 8.06 (2021-11-20):
 -------------------------------------------------------------------------------
 * Updated kernel to the Long-Term-Supported linux-5.10.79
