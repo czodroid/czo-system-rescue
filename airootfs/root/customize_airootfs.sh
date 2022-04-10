@@ -97,6 +97,10 @@ date > /root/czo@free.fr
 # allow ssh X11Forwarding
 perl -i -pe 's,^#?X11Forwarding.*,X11Forwarding yes,' /etc/ssh/sshd_config
 
+# cp font
+cp -f /root/SourceCodeProforPowerline-Regular.otf /usr/share/fonts
+rm -f /root/SourceCodeProforPowerline-Regular.otf
+
 # cp wallpaper
 cp -f /root/root.jpg /usr/share/backgrounds/xfce/xfce-teal.jpg
 cp -f /root/root.png /usr/share/backgrounds/xfce/xfce-verticals.png
