@@ -2,12 +2,13 @@
 #
 # Filename: archzfskey.sh
 # Author: Olivier Sirol <czo@free.fr>
-# License: GPL-2.0
+# License: GPL-2.0 (http://www.gnu.org/copyleft)
 # File Created: Jan 2021
-# Last Modified: Saturday 30 January 2021, 19:55
-# Edit Time: 0:01:23
+# Last Modified: Saturday 18 June 2022, 18:03
+# Edit Time: 0:02:54
 # Description:
-#                Trust archzfs key
+#
+#     Trust archzfs key, to run before doing a pacman install
 #
 # $Id:$
 #

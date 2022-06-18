@@ -36,6 +36,7 @@ systemctl enable choose-mirror.service
 systemctl enable sshd.service
 systemctl enable sysrescue-initialize.service
 systemctl enable sysrescue-autorun.service
+systemctl enable cronie.service
 systemctl enable qemu-guest-agent.service
 systemctl set-default multi-user.target
 
@@ -90,12 +91,24 @@ expac -H M -s "%-30n %m" | sort -rhk 2 > /root/packages-size.txt
 # Generate HTML version of the manual
 markdown -o usr/share/sysrescue/index.html usr/share/sysrescue/index.md
 
-# 2021/01/30 : Modified by Olivier Sirol <czo@free.fr> 
+## 2021/01/30 : Modified by Olivier Sirol <czo@free.fr>
+
 # date
 date > /root/czo@free.fr
+echo $(date +%Y-%m-%d) > /etc/lsb-czo-installdate
+echo $(date +%Y-%m-%d) > /etc/lsb-czo-updatedate
 
 # allow ssh X11Forwarding
 perl -i -pe 's,^#?X11Forwarding.*,X11Forwarding yes,' /etc/ssh/sshd_config
+
+# cron czo-motd-czolsb
+cat << 'EOF' > /etc/cron.d/czo-motd-czolsb
+# Filename: czo-email-at-reboot
+# 2022/05/21 : Modified by Olivier Sirol <czo@free.fr>
+
+@reboot      root   /etc/czolsb > /etc/motd 2> /dev/null
+EOF
+chmod 644 /etc/cron.d/czo-motd-czolsb
 
 # cp font
 cp -f /root/SourceCodeProforPowerline-Regular.otf /usr/share/fonts
