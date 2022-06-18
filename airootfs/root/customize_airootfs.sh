@@ -101,15 +101,6 @@ echo $(date +%Y-%m-%d) > /etc/lsb-czo-updatedate
 # allow ssh X11Forwarding
 perl -i -pe 's,^#?X11Forwarding.*,X11Forwarding yes,' /etc/ssh/sshd_config
 
-# cron czo-motd-czolsb
-cat << 'EOF' > /etc/cron.d/czo-motd-czolsb
-# Filename: czo-email-at-reboot
-# 2022/05/21 : Modified by Olivier Sirol <czo@free.fr>
-
-@reboot      root   /etc/czolsb > /etc/motd 2> /dev/null
-EOF
-chmod 644 /etc/cron.d/czo-motd-czolsb
-
 # cp font
 cp -f /root/SourceCodeProforPowerline-Regular.otf /usr/share/fonts
 rm -f /root/SourceCodeProforPowerline-Regular.otf
@@ -133,5 +124,4 @@ wget -qO- http://git.io/JkHdk | sh
 # pacman-key -r DDF7DB817396A49B2A2723F7403BD972F75D9D76
 # pacman-key --lsign-key DDF7DB817396A49B2A2723F7403BD972F75D9D76
 # pacman -Sy
-
 
