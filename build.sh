@@ -113,6 +113,13 @@ make_04_customize_airootfs() {
     curl -o ${work_dir}/${arch}/airootfs/etc/pacman.d/mirrorlist "$mirrorlist_url"
 
     setarch ${arch} mkarchiso ${verbose} -w "${work_dir}/${arch}" -C "${work_dir}/pacman.conf" -D "${install_dir}" -r '/root/customize_airootfs.sh' run
+
+    # unmount chroot /dev again as it could have been busy before due to gpg-agent
+    if findmnt --mountpoint "${work_dir}/${arch}/airootfs/dev" >/dev/null 2>&1 ; then
+        # unmount chroot /dev again, it was busy before due to gpg-agent
+        umount "${work_dir}/${arch}/airootfs/dev"
+    fi
+
     rm -f ${work_dir}/${arch}/airootfs/root/customize_airootfs.sh
 
     # strip large binaries
@@ -220,10 +227,10 @@ make_11_efiboot() {
     mkdir -p ${work_dir}/efitemp/efi/boot
 
     grub-mkimage -m "${work_dir}/memdisk.img" -o "${work_dir}/iso/EFI/boot/${efiboot}" \
-    	--prefix='(memdisk)/boot/grub' -d /usr/lib/grub/${efiarch} -C xz -O ${efiarch} \
-    	search iso9660 configfile normal memdisk tar boot linux part_msdos part_gpt \
-    	part_apple configfile help loadenv ls reboot chain search_fs_uuid multiboot \
-    	fat iso9660 udf ext2 btrfs ntfs reiserfs xfs lvm ata
+       --prefix='(memdisk)/boot/grub' -d /usr/lib/grub/${efiarch} -C xz -O ${efiarch} \
+       search iso9660 configfile normal memdisk tar boot linux part_msdos part_gpt \
+       part_apple configfile help loadenv ls reboot chain search_fs_uuid multiboot \
+       fat iso9660 udf ext2 btrfs ntfs reiserfs xfs lvm ata
 
     cp -a "${work_dir}/iso/EFI/boot/${efiboot}" "${work_dir}/efitemp/efi/boot/${efiboot}"
 

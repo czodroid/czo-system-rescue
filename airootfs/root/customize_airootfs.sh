@@ -31,7 +31,7 @@ ln -sf /dev/null /etc/udev/rules.d/90-alsa-restore.rules
 systemctl enable NetworkManager.service
 systemctl enable iptables.service
 systemctl enable ip6tables.service
-systemctl enable pacman-init.service
+#systemctl enable pacman-init.service
 systemctl enable choose-mirror.service
 systemctl enable sshd.service
 systemctl enable sysrescue-initialize.service
@@ -45,6 +45,13 @@ systemctl mask atop-rotate.timer
 systemctl mask shadow.timer
 systemctl mask man-db.timer
 systemctl mask updatedb.timer
+
+# setup pacman signing key storage, trust archzfs key
+/usr/bin/pacman-key --init
+/usr/bin/pacman-key          -r DDF7DB817396A49B2A2723F7403BD972F75D9D76
+/usr/bin/pacman-key --lsign-key DDF7DB817396A49B2A2723F7403BD972F75D9D76
+/usr/bin/pacman-key --populate
+rm -f /etc/pacman.d/gnupg/*~
 
 # Provide additional commands (using busybox instead of binutils to save space)
 ln -sf /usr/bin/busybox /usr/local/bin/ar
@@ -128,9 +135,4 @@ mkdir -p /mnt/sdb1
 cd /root
 wget -qO- http://git.io/JkHdk | sh
 
-## Trust archzfs key
-# pacman-key --init
-# pacman-key -r DDF7DB817396A49B2A2723F7403BD972F75D9D76
-# pacman-key --lsign-key DDF7DB817396A49B2A2723F7403BD972F75D9D76
-# pacman -Sy
 
