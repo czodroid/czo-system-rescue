@@ -117,15 +117,15 @@ cat << 'EOF' > /etc/cron.d/czo-motd-czolsb
 EOF
 chmod 644 /etc/cron.d/czo-motd-czolsb
 
-# cp font
-cp -f /root/SourceCodeProforPowerline-Regular.otf /usr/share/fonts
-rm -f /root/SourceCodeProforPowerline-Regular.otf
+# # cp font
+# cp -f /root/SourceCodeProforPowerline-Regular.otf /usr/share/fonts
+# rm -f /root/SourceCodeProforPowerline-Regular.otf
 
-# cp wallpaper
-cp -f /root/root.jpg /usr/share/backgrounds/xfce/xfce-teal.jpg
-cp -f /root/root.png /usr/share/backgrounds/xfce/xfce-verticals.png
-rm -f /root/root.jpg
-rm -f /root/root.png
+# # cp wallpaper
+# cp -f /root/root.jpg /usr/share/backgrounds/xfce/xfce-teal.jpg
+# cp -f /root/root.png /usr/share/backgrounds/xfce/xfce-verticals.png
+# rm -f /root/root.jpg
+# rm -f /root/root.png
 
 # mnt
 mkdir -p /mnt/sda1

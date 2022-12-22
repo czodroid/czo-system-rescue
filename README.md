@@ -2,11 +2,11 @@
 
 ## Czo's SystemRescue with ZFS
 
-This is my fork of SystemRescue with ZFS. 
+This is my fork of SystemRescue with ZFS.
 
-https://gitlab.com/czo/czo-rescue
+https://gitlab.com/czo/czo-rescue-arch
 
-It's a SystemRescue with zfs binaries + 3ware raid + 
+It's a SystemRescue with zfs binaries + 3ware raid +
 my configuration files.
 
 Xfce has its whisker menu and its xfce4-xkb plugin. There
