@@ -11,7 +11,7 @@
       <property name="length" type="uint" value="100"/>
       <property name="plugin-ids" type="array">
         <value type="int" value="1"/>
-        <value type="int" value="17"/>
+        <value type="int" value="13"/>
         <value type="int" value="2"/>
         <value type="int" value="3"/>
         <value type="int" value="6"/>
@@ -46,7 +46,7 @@
     </property>
     <property name="plugin-6" type="string" value="tasklist"/>
     <property name="plugin-7" type="string" value="separator">
-      <property name="expand" type="bool" value="true"/>
+      <property name="expand" type="bool" value="false"/>
       <property name="style" type="uint" value="0"/>
     </property>
     <property name="plugin-8" type="string" value="pulseaudio">
@@ -112,14 +112,15 @@
     <property name="plugin-4" type="string" value="notification-plugin"/>
     <property name="plugin-12" type="string" value="separator">
       <property name="style" type="uint" value="0"/>
+      <property name="expand" type="bool" value="true"/>
     </property>
     <property name="plugin-15" type="string" value="separator">
       <property name="style" type="uint" value="0"/>
     </property>
     <property name="plugin-16" type="string" value="power-manager-plugin"/>
-    <property name="plugin-17" type="string" value="launcher">
+    <property name="plugin-13" type="string" value="launcher">
       <property name="items" type="array">
-        <value type="string" value="16730860891.desktop"/>
+        <value type="string" value="16730955391.desktop"/>
       </property>
     </property>
   </property>
