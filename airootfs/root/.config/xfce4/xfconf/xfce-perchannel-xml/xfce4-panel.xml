@@ -120,7 +120,7 @@
     <property name="plugin-16" type="string" value="power-manager-plugin"/>
     <property name="plugin-13" type="string" value="launcher">
       <property name="items" type="array">
-        <value type="string" value="16730955391.desktop"/>
+        <value type="string" value="16731030001.desktop"/>
       </property>
     </property>
   </property>
