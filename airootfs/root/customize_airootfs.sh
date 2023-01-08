@@ -72,9 +72,9 @@ rm -rf /usr/lib/{libgo.*,libgphobos.*,libgfortran.*}
 rm -rf /usr/share/gtk-doc /usr/share/doc
 rm -rf /usr/share/keepassxc/docs /usr/share/keepassxc/translations
 rm -rf /usr/share/help
-#rm -rf /usr/share/gir*
-#rm -rf /usr/include
-#rm -rf /usr/share/man/man3
+rm -rf /usr/share/gir*
+rm -rf /usr/include
+rm -rf /usr/share/man/man3
 
 # Cleanup XFCE menu
 sed -i '2 i NoDisplay=true' /usr/share/applications/{xfce4-mail-reader,xfce4-web-browser}.desktop
