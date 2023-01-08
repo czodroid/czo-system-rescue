@@ -63,7 +63,7 @@ ln -sf /usr/bin/busybox /usr/local/bin/strings
 
 # pacman --noconfirm -Rs linux-lts-headers
 rm -rf /usr/lib/modules/$(uname -r)/build/
-# I'll do an debian zfs sysrescue !!!
+# czo: I'll do an debian zfs sysrescue !!!
 # and, sysrecue team, thanks for your work !!!
 
 find /usr/lib -type f -name '*.py[co]' -delete -o -type d -name __pycache__ -delete
