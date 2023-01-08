@@ -260,6 +260,7 @@ make_13_iso() {
             cp -vf "$srm" ${work_dir}/iso/${install_dir}/
         done
     )
+    rm -f "${out_dir}/czo-rescue-arch-${iso_mainver//.}.iso"
     setarch ${arch} mkarchiso ${verbose} -w "${work_dir}" -D "${install_dir}" -L "${iso_label}" -P "${iso_publisher}" -A "${iso_application}" -o "${out_dir}" iso "czo-rescue-arch-${iso_mainver//.}.iso"
 }
 
