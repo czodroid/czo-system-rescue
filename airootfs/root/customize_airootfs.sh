@@ -58,15 +58,19 @@ ln -sf /usr/bin/busybox /usr/local/bin/ar
 ln -sf /usr/bin/busybox /usr/local/bin/strings
 
 # Cleanup
+
+# rmf /usr/lib/modules/5.15.86-1-lts/build/
+pacman --noconfirm -Rs linux-lts-headers
+
 find /usr/lib -type f -name '*.py[co]' -delete -o -type d -name __pycache__ -delete
 find /usr/lib -type f,l -name '*.a' -delete
 rm -rf /usr/lib/{libgo.*,libgphobos.*,libgfortran.*}
-rm -rf /usr/share/gtk-doc /usr/share/doc /usr/share/keepassxc/docs/*.pdf
-rm -rf /usr/share/keepassxc/translations
-rm -rf /usr/share/help/*/ghex/
-rm -rf /usr/share/gir*
-rm -rf /usr/include
-rm -rf /usr/share/man/man3
+rm -rf /usr/share/gtk-doc /usr/share/doc
+rm -rf /usr/share/keepassxc/docs /usr/share/keepassxc/translations
+rm -rf /usr/share/help
+#rm -rf /usr/share/gir*
+#rm -rf /usr/include
+#rm -rf /usr/share/man/man3
 
 # Cleanup XFCE menu
 sed -i '2 i NoDisplay=true' /usr/share/applications/{xfce4-mail-reader,xfce4-web-browser}.desktop
