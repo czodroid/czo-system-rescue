@@ -85,7 +85,7 @@ do
           {
               echo '[ -f ~/.vnc/passwd ] && pwopt="-usepw" || pwopt="-nopw"'
               echo 'x11vnc $pwopt -nevershared -forever -logfile /var/log/x11vnc.log &'
-          } > /root/.xprofile
+          } > /root/.profile
           ;;
     esac
 done
