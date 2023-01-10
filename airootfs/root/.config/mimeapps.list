@@ -1,5 +1,5 @@
 [Default Applications]
-application/pdf=firefox-esr.desktop
+application/pdf=firefox.desktop
 
 [Added Associations]
-application/pdf=firefox-esr.desktop;
+application/pdf=firefox.desktop;
