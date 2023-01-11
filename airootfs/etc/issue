@@ -1,13 +1,13 @@
-\e[01;31m ========= \e[01;37mSystemRescue %ISO_VERSION% (%ISO_DATE%)\e[01;31m ======== \e[01;37m\l\e[00;37m/6\e[01;31m =========
+\e[91m ========= \e[97mCzo Rescue Arch %ISO_VERSION% (%ISO_DATE%)\e[91m ======== \e[97m\l\e[91m =========
 
-            \e[00;31mhttps://gitlab.com/czo/czo-rescue-arch
+            \e[91mhttps://gitlab.com/czo/czo-rescue-arch
 
-\e[00;31m*\e[01;31m Console environment\e[00;37m :
+\e[31m*\e[01;31m Console environment\e[m :
    Run \e[01;37msetkmap\e[00;37m to choose the keyboard layout
 
-\e[00;31m*\e[01;31m Graphical environment\e[00;37m :
+\e[31m*\e[01;31m Graphical environment\e[m :
    Type \e[01;37mstartx\e[00;37m to run the graphical environment
 
-\e[00;31m*\e[01;31m Change cowspace\e[00;37m :
+\e[31m*\e[01;31m Change cowspace\e[m :
    mount -o remount,size=1G /run/archiso/cowspace
 
