@@ -12,7 +12,7 @@
       <property name="plugin-ids" type="array">
         <value type="int" value="1"/>
         <value type="int" value="13"/>
-        <value type="int" value="17"/>
+        <value type="int" value="3"/>
         <value type="int" value="2"/>
         <value type="int" value="6"/>
         <value type="int" value="12"/>
@@ -118,9 +118,9 @@
         <value type="string" value="16731030001.desktop"/>
       </property>
     </property>
-    <property name="plugin-17" type="string" value="launcher">
+    <property name="plugin-3" type="string" value="launcher">
       <property name="items" type="array">
-        <value type="string" value="16731935911.desktop"/>
+        <value type="string" value="16734212461.desktop"/>
       </property>
     </property>
   </property>
