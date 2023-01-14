@@ -1,0 +1,10 @@
+<div id="colleft">
+    <h5>Site map</h5>
+    {{- range .Site.Pages }}
+      {{ if .Params.nameInMenu }}
+        <div><a href="{{ .RelPermalink }}">{{ .Params.nameInMenu }}</a></div>
+      {{ end }}
+    {{- end }}
+    <hr/>
+    {{ partial "slot-colleft.html" . }}
+</div>

@@ -1,0 +1,15 @@
+languageCode = "en-gb"
+title = "SystemRescue"
+baseurl = "https://www.system-rescue.org/"
+disablePathToLower = true
+disableRSS = true
+
+# options required to make the links work in an offline copy
+relativeURLs = true
+
+# reduce content created in the offline copy
+disableAliases = true
+disableKinds = [ "taxonomy", "term", "RSS", "sitemap", "robotsTXT", "404" ]
+
+[params]
+  offline = true

@@ -12,6 +12,7 @@ iso_label="RESCUE${iso_mainver//.}"
 iso_date="$(date +%Y-%m-%d)"
 iso_publisher="SystemRescue <http://www.system-rescue.org>"
 iso_application="SystemRescue"
+documentation_dir="/usr/share/sysrescue/html"
 install_dir=sysresccd
 work_dir=work
 out_dir=out
@@ -20,7 +21,8 @@ arch="$(uname -m)"
 sfs_comp="xz"
 sfs_opts="-Xbcj x86 -b 512k -Xdict-size 512k"
 
-verbose=""
+# always in verbose mode
+verbose="-v"
 
 umask 0022
 
@@ -64,14 +66,15 @@ _usage ()
     echo "                        Default: ${work_dir}"
     echo "    -o <out_dir>       Set the output directory"
     echo "                        Default: ${out_dir}"
-    echo "    -v                 Enable verbose output"
     echo "    -h                 This help message"
     exit ${1}
 }
 
 # Helper function to run make_*() only one time per architecture.
 run_once() {
+
     echo "<==== ${work_dir}/build.${1} ======================"
+
     if [[ ! -e ${work_dir}/build.${1} ]]; then
         $1
         touch ${work_dir}/build.${1}
@@ -80,6 +83,7 @@ run_once() {
 
 # Setup custom pacman.conf with current cache directories.
 make_01_pacman_conf() {
+    echo '-> Setup custom pacman.conf with current cache directories.'
     local _cache_dirs
     _cache_dirs=($(pacman -v 2>&1 | grep '^Cache Dirs:' | sed 's/Cache Dirs:\s*//g'))
     sed -r "s|^#?\\s*CacheDir.+|CacheDir = $(echo -n ${_cache_dirs[@]})|g; s|^Architecture\s*=.*$|Architecture = ${arch}|" ${script_path}/pacman.conf > ${work_dir}/pacman.conf
@@ -87,16 +91,48 @@ make_01_pacman_conf() {
 
 # Base installation: base metapackage + syslinux (airootfs)
 make_02_basefs() {
+
+    echo '-> Base installation: base metapackage + syslinux (airootfs)'
+
     setarch ${arch} mkarchiso ${verbose} -w "${work_dir}/${arch}" -C "${work_dir}/pacman.conf" -D "${install_dir}" init
+}
+
+# offline documentation
+make_02_documentation() {
+
+    echo '-> offline documentation'
+
+    mkdir -p "${work_dir}/${arch}/airootfs/${documentation_dir}"
+
+    # Delete the download page from the offline version as it makes no sense to keep it
+    rm -rf website/content/Download
+
+    # parameters are all relative to --source dir
+    /usr/bin/hugo --source "website/" --config "config-offline.toml" --gc --verbose \
+        --destination "../${work_dir}/${arch}/airootfs/${documentation_dir}"
+    RET=$?
+
+    if ! [ "$RET" -eq 0 ]; then
+        echo "error generating offline documentation (returned $RET), aborting"
+        exit 1
+    fi
+
+    # post-process hugo output and add index.hmtl to all directory links
+    # required until https://github.com/gohugoio/hugo/issues/4428 is implemented
+    find "${work_dir}/${arch}/airootfs/${documentation_dir}" -name "*.html" \
+        -exec sed -i -e 's#<a href="\.\(.*\)/"#<a href=".\1/index.html"#g' {} \;
+
 }
 
 # Additional packages (airootfs)
 make_03_packages() {
+    echo '-> Additional packages (airootfs)'
     setarch ${arch} mkarchiso ${verbose} -w "${work_dir}/${arch}" -C "${work_dir}/pacman.conf" -D "${install_dir}" -p "$(grep -h -v '^#' ${script_path}/packages)" install
 }
 
 # Customize installation (airootfs)
 make_04_customize_airootfs() {
+    echo '-> Customize installation (airootfs)'
     cp -af --no-preserve=ownership ${script_path}/airootfs ${work_dir}/${arch}
 
     cp ${script_path}/pacman.conf ${work_dir}/${arch}/airootfs/etc
@@ -128,6 +164,7 @@ make_04_customize_airootfs() {
 
 # Copy mkinitcpio archiso hooks and build initramfs (airootfs)
 make_05_setup_mkinitcpio() {
+    echo '-> Copy mkinitcpio archiso hooks and build initramfs (airootfs)'
     local _hook
     mkdir -p ${work_dir}/${arch}/airootfs/etc/initcpio/hooks
     mkdir -p ${work_dir}/${arch}/airootfs/etc/initcpio/install
@@ -153,6 +190,7 @@ make_05_setup_mkinitcpio() {
 
 # Prepare kernel/initramfs ${install_dir}/boot/
 make_06_boot() {
+    echo '-> Prepare kernel/initramfs ${install_dir}/boot/'
     mkdir -p ${work_dir}/iso/${install_dir}/boot/${arch}
     cp ${work_dir}/${arch}/airootfs/boot/sysresccd.img ${work_dir}/iso/${install_dir}/boot/${arch}/sysresccd.img
     chmod 644 ${work_dir}/iso/${install_dir}/boot/${arch}/sysresccd.img
@@ -161,6 +199,7 @@ make_06_boot() {
 
 # Add other aditional/extra files to ${install_dir}/boot/
 make_07_boot_extra() {
+    echo '-> Add other aditional/extra files to ${install_dir}/boot/'
     cp ${work_dir}/${arch}/airootfs/boot/memtest86+/memtest.bin ${work_dir}/iso/${install_dir}/boot/memtest.bin
     cp ${work_dir}/${arch}/airootfs/boot/memtest86+/memtest.efi ${work_dir}/iso/${install_dir}/boot/memtest.efi
     cp ${work_dir}/${arch}/airootfs/usr/share/licenses/common/GPL2/license.txt ${work_dir}/iso/${install_dir}/boot/memtest.COPYING
@@ -170,8 +209,9 @@ make_07_boot_extra() {
     cp ${work_dir}/${arch}/airootfs/usr/share/licenses/amd-ucode/LICENSE* ${work_dir}/iso/${install_dir}/boot/amd_ucode.LICENSE
 }
 
-# Prepare /${install_dir}/boot/syslinux
+#
 make_08_syslinux() {
+    echo '-> Prepare /${install_dir}/boot/syslinux'
     _uname_r=$(file -b ${work_dir}/${arch}/airootfs/boot/vmlinuz-linux-lts| awk 'f{print;f=0} /version/{f=1}' RS=' ')
     mkdir -p ${work_dir}/iso/${install_dir}/boot/syslinux
     for _cfg in ${script_path}/syslinux/*.cfg; do
@@ -191,6 +231,7 @@ make_08_syslinux() {
 
 # Prepare /isolinux
 make_09_isolinux() {
+    echo '-> Prepare /isolinux'
     mkdir -p ${work_dir}/iso/isolinux
     sed "s|%INSTALL_DIR%|${install_dir}|g" ${script_path}/isolinux/isolinux.cfg > ${work_dir}/iso/isolinux/isolinux.cfg
     cp ${work_dir}/${arch}/airootfs/usr/lib/syslinux/bios/isolinux.bin ${work_dir}/iso/isolinux/
@@ -200,6 +241,7 @@ make_09_isolinux() {
 
 # Prepare /EFI
 make_10_efi() {
+    echo '-> Prepare /EFI'
     rm -rf ${work_dir}/iso/EFI
     rm -rf ${work_dir}/iso/boot
     mkdir -p ${work_dir}/iso/EFI/boot
@@ -217,7 +259,7 @@ make_10_efi() {
 
 # Prepare efiboot.img::/EFI for "El Torito" EFI boot mode
 make_11_efiboot() {
-
+    echo '-> Prepare efiboot.img::/EFI for "El Torito" EFI boot mode'
     rm -rf ${work_dir}/memdisk
     mkdir -p "${work_dir}/memdisk"
     mkdir -p "${work_dir}/memdisk/boot/grub"
@@ -243,6 +285,7 @@ make_11_efiboot() {
 
 # Build airootfs filesystem image
 make_12_prepare() {
+    echo '-> Build airootfs filesystem image'
     cp -a -l -f ${work_dir}/${arch}/airootfs ${work_dir}
     setarch ${arch} mkarchiso ${verbose} -w "${work_dir}" -D "${install_dir}" pkglist
     setarch ${arch} mkarchiso ${verbose} -w "${work_dir}" -D "${install_dir}" ${gpg_key:+-g ${gpg_key}} -c ${sfs_comp} -t "${sfs_opts}" prepare
@@ -252,6 +295,7 @@ make_12_prepare() {
 
 # Build ISO
 make_13_iso() {
+    echo '-> Build ISO'
     date > ${work_dir}/iso/czo@free.fr
     cp ${version_file} ${work_dir}/iso/${install_dir}/
     (
@@ -281,7 +325,7 @@ while getopts 'N:V:L:P:A:D:w:o:g:vh' arg; do
         w) work_dir="${OPTARG}" ;;
         o) out_dir="${OPTARG}" ;;
         g) gpg_key="${OPTARG}" ;;
-        v) verbose="-v" ;;
+        v) ;;
         h) _usage 0 ;;
         *)
            echo "Invalid argument '${arg}'"
@@ -294,6 +338,7 @@ mkdir -p ${work_dir}
 
 run_once make_01_pacman_conf
 run_once make_02_basefs
+run_once make_02_documentation
 run_once make_03_packages
 run_once make_04_customize_airootfs
 run_once make_05_setup_mkinitcpio

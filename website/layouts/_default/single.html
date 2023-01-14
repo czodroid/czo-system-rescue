@@ -1,0 +1,20 @@
+{{ partial "header.html" . }}
+<body>
+<div id="wrapper">
+    <div id="header">
+        {{ partial "title.html" . }}
+        {{ partial "topmenu.html" . }}
+    </div>
+    <div id="contents">
+        {{ partial "colleft.html" . }}
+        <div id="colcenter">
+            <h1>{{ .Title }}</h1>
+            <hr/>
+            {{ partial "slot-toplboard.html" . }}
+            {{ .Content }}
+        </div>
+        {{ partial "colright.html" . }}
+    </div>
+</div>
+</body>
+{{ partial "footer.html" . }}
