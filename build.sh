@@ -261,8 +261,8 @@ make_5_image() {
     echo '<== Build airootfs filesystem image'
     setarch ${arch} mkarchiso ${verbose} -w "${work_dir}" -D "${install_dir}" ${gpg_key:+-g ${gpg_key}} -c ${sfs_comp} -t "${sfs_opts}" prepare
     echo '<== Rm airootfs'
-    rm -rf ${work_dir}/airootfs
-    # rm -rf ${work_dir}/${arch}/airootfs (if low space, this helps)
+    #rm -rf ${work_dir}/airootfs
+    ## rm -rf ${work_dir}/${arch}/airootfs (if low space, this helps)
 }
 
 # Build ISO
@@ -312,7 +312,7 @@ rm -f $buildlog
 (
 run_once make_1_pacman
 run_once make_2_customize_airootfs
-#exit
+exit
 run_once make_3_mkinitcpio_boot
 run_once make_4_isolinux_efi
 run_once make_5_image
