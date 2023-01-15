@@ -15,6 +15,7 @@ iso_publisher="SystemRescue <http://www.system-rescue.org>"
 iso_application="SystemRescue"
 documentation_dir="/usr/share/sysrescue/html"
 install_dir=sysresccd
+buildlog=buildlog.log
 work_dir=work
 out_dir=out
 gpg_key=
@@ -315,5 +316,5 @@ run_once make_4_boot
 run_once make_5_isolinux
 run_once make_6_image
 run_once make_7_iso
-) 2>&1 | tee -a $LOG
+) 2>&1 | tee -a $buildlog
 

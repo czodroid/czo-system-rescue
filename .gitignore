@@ -1,5 +1,6 @@
 out/
 work/
+buildlog.log
 .*.sw?
 w/
 website/.hugo_build.lock
