@@ -1,3 +1,6 @@
-out
-work
+out/
+work/
 .*.sw?
+w/
+website/.hugo_build.lock
+
