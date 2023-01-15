@@ -16,7 +16,7 @@ Here are the most important changes made in each SystemRescue release. It
 only shows changes in the versions of the Linux kernel and relevant utilities.
 The [full list of packages](/Detailed-packages-list/) provides more details
 about the exact versions of all other packages.
-* 8.11)
+
 * **9.06) 2022-12-18:**
   * Added Memtest86+ memory tester v6.00 for UEFI in the Grub boot menu (#308)
   * sysrescueusbwriter to create USB media on Linux, creates writable FAT filesystem
