@@ -16,7 +16,7 @@ iso_application="SystemRescue"
 documentation_dir="/usr/share/sysrescue/html"
 install_dir=sysresccd
 work_dir=work
-out_dir=$work_dir/out
+out_dir=out
 buildlog=$work_dir/buildlog.log
 gpg_key=
 arch="$(uname -m)"
@@ -307,6 +307,7 @@ while getopts 'N:V:L:P:A:D:w:o:g:vh' arg; do
 done
 
 mkdir -p ${work_dir}
+rm -f $buildlog
 
 (
 run_once make_1_pacman
