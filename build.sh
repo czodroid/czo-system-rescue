@@ -312,7 +312,6 @@ rm -f $buildlog
 (
 run_once make_1_pacman
 run_once make_2_customize_airootfs
-exit
 run_once make_3_mkinitcpio_boot
 run_once make_4_isolinux_efi
 run_once make_5_image
