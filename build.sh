@@ -146,8 +146,8 @@ make_2_customize_airootfs() {
     find ${work_dir}/${arch}/airootfs/usr/lib -type f -name "lib*.so.*" -exec strip --strip-all {} \;
 }
 
-# Copy mkinitcpio archiso hooks and build initramfs (airootfs)
-make_3_setup_mkinitcpio() {
+# Build initramfs (airootfs) and prepare kernel/initramfs ${install_dir}/boot/
+make_3_mkinitcpio_boot() {
     echo '<== Copy mkinitcpio archiso hooks and build initramfs (airootfs)'
     local _hook
     mkdir -p ${work_dir}/${arch}/airootfs/etc/initcpio/hooks
@@ -170,10 +170,7 @@ make_3_setup_mkinitcpio() {
     if [[ ${gpg_key} ]]; then
       exec 17<&-
     fi
-}
 
-# Prepare kernel/initramfs ${install_dir}/boot/
-make_4_boot() {
     echo '<== Prepare kernel/initramfs ${install_dir}/boot/'
     mkdir -p ${work_dir}/iso/${install_dir}/boot/${arch}
     cp ${work_dir}/${arch}/airootfs/boot/sysresccd.img ${work_dir}/iso/${install_dir}/boot/${arch}/sysresccd.img
@@ -207,8 +204,8 @@ make_4_boot() {
     gzip -c -9 ${work_dir}/${arch}/airootfs/usr/lib/modules/${_uname_r}/modules.alias > ${work_dir}/iso/${install_dir}/boot/syslinux/hdt/modalias.gz
 }
 
-# Prepare /isolinux
-make_5_isolinux() {
+# Prepare /isolinux and efi
+make_4_isolinux_efi() {
     echo '<== Prepare /isolinux'
     mkdir -p ${work_dir}/iso/isolinux
     sed "s|%INSTALL_DIR%|${install_dir}|g" ${script_path}/isolinux/isolinux.cfg > ${work_dir}/iso/isolinux/isolinux.cfg
@@ -256,7 +253,7 @@ make_5_isolinux() {
 }
 
 # Build airootfs filesystem image
-make_6_image() {
+make_5_image() {
     echo '<== Build airootfs filesystem image'
     cp -a -l -f ${work_dir}/${arch}/airootfs ${work_dir}
     setarch ${arch} mkarchiso ${verbose} -w "${work_dir}" -D "${install_dir}" pkglist
@@ -266,7 +263,7 @@ make_6_image() {
 }
 
 # Build ISO
-make_7_iso() {
+make_6_iso() {
     echo '<== Build ISO'
     date > ${work_dir}/iso/czo@free.fr
     cp ${version_file} ${work_dir}/iso/${install_dir}/
@@ -312,10 +309,9 @@ mkdir -p ${work_dir}
 run_once make_1_pacman
 run_once make_2_customize_airootfs
 #exit
-run_once make_3_setup_mkinitcpio
-run_once make_4_boot
-run_once make_5_isolinux
-run_once make_6_image
-run_once make_7_iso
+run_once make_3_mkinitcpio_boot
+run_once make_4_isolinux_efi
+run_once make_5_image
+run_once make_6_iso
 ) 2>&1 | tee -a $buildlog
 
