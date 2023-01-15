@@ -15,9 +15,9 @@ iso_publisher="SystemRescue <http://www.system-rescue.org>"
 iso_application="SystemRescue"
 documentation_dir="/usr/share/sysrescue/html"
 install_dir=sysresccd
-buildlog=buildlog.log
 work_dir=work
-out_dir=out
+out_dir=$work_dir/out
+buildlog=$work_dir/buildlog.log
 gpg_key=
 arch="$(uname -m)"
 sfs_comp="xz"
@@ -311,6 +311,7 @@ mkdir -p ${work_dir}
 (
 run_once make_1_pacman
 run_once make_2_customize_airootfs
+#exit
 run_once make_3_setup_mkinitcpio
 run_once make_4_boot
 run_once make_5_isolinux
