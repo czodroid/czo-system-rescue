@@ -254,10 +254,13 @@ make_4_isolinux_efi() {
 
 # Build airootfs filesystem image
 make_5_image() {
-    echo '<== Build airootfs filesystem image'
+    echo '<== Copy airootfs'
     cp -a -l -f ${work_dir}/${arch}/airootfs ${work_dir}
+    echo '<== Pkglist'
     setarch ${arch} mkarchiso ${verbose} -w "${work_dir}" -D "${install_dir}" pkglist
+    echo '<== Build airootfs filesystem image'
     setarch ${arch} mkarchiso ${verbose} -w "${work_dir}" -D "${install_dir}" ${gpg_key:+-g ${gpg_key}} -c ${sfs_comp} -t "${sfs_opts}" prepare
+    echo '<== Rm airootfs'
     rm -rf ${work_dir}/airootfs
     # rm -rf ${work_dir}/${arch}/airootfs (if low space, this helps)
 }
