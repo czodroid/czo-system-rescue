@@ -280,10 +280,12 @@ make_6_iso() {
     rm -f "${out_dir}/czo-rescue-arch-${iso_mainver//.}.iso"
     setarch ${arch} mkarchiso ${verbose} -w "${work_dir}" -D "${install_dir}" -L "${iso_label}" -P "${iso_publisher}" -A "${iso_application}" -o "${out_dir}" iso "czo-rescue-arch-${iso_mainver//.}.iso"
 
-    # embed checksum
+    echo '<== Embed checksum'
     implantisomd5 "${out_dir}/czo-rescue-arch-${iso_mainver//.}.iso"
-    # sha checksum
-    sha512sum "${out_dir}/czo-rescue-arch-${iso_mainver//.}.iso" "${out_dir}/czo-rescue-arch-${iso_mainver//.}.iso.sha512"
+
+    echo '<== SHA512 checksum'
+    cd ${out_dir}
+    sha512sum "czo-rescue-arch-${iso_mainver//.}.iso" > "$czo-rescue-arch-${iso_mainver//.}.iso.sha512"
 }
 
 if [[ ${EUID} -ne 0 ]]; then
