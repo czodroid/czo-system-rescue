@@ -269,7 +269,15 @@ make_5_image() {
 # Build ISO
 make_6_iso() {
     echo '<== Build ISO'
-    date > ${work_dir}/iso/czo@free.fr
+
+    cat << HEREDOC > ${work_dir}/iso/czo-rescue-arch
+Czo Rescue Arch ${iso_version} (${iso_date})
+
+--
+https://gitlab.com/czo/czo-rescue-arch
+
+HEREDOC
+
     cp ${version_file} ${work_dir}/iso/${install_dir}/
     (
         shopt -s nullglob
