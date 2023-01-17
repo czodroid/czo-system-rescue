@@ -288,6 +288,8 @@ make_6_iso() {
         echo '<== SHA512 checksum'
         sha512sum "${iso_disk_name}" > "${iso_disk_name}.sha512"
     )
+
+    echo '<= done!'
 }
 
 if [[ ${EUID} -ne 0 ]]; then
