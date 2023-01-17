@@ -100,16 +100,13 @@ sed -i -e '/# ==== BEGIN sysrescuerepo ====/,/# ==== END sysrescuerepo ====/d' /
 /usr/bin/updatedb
 
 # Packages
-pacman -Q > /root/packages-list.txt
-expac -H M -s "%-30n %m" | sort -rhk 2 > /root/packages-size.txt
+pacman -Q > /root/pkg_list_rescue.txt
+expac -H M -s "%-30n %m" | sort -rhk 2 > /root/pkg_size_rescue.txt
 
 # Generate HTML version of the manual
 markdown -o usr/share/sysrescue/index.html usr/share/sysrescue/index.md
 
-## 2021/01/30 : Modified by Olivier Sirol <czo@free.fr>
-
 # date
-date > /root/czo@free.fr
 echo $(date +%Y-%m-%d) > /etc/lsb-czo-installdate
 echo $(date +%Y-%m-%d) > /etc/lsb-czo-updatedate
 
@@ -119,21 +116,10 @@ perl -i -pe 's,^#?X11Forwarding.*,X11Forwarding yes,' /etc/ssh/sshd_config
 # cron czo-motd-czolsb
 cat << 'EOF' > /etc/cron.d/czo-motd-czolsb
 # Filename: czo-email-at-reboot
-# 2022/05/21 : Modified by Olivier Sirol <czo@free.fr>
 
 @reboot      root   /etc/czolsb > /etc/motd 2> /dev/null
 EOF
 chmod 644 /etc/cron.d/czo-motd-czolsb
-
-# # cp font
-# cp -f /root/SourceCodeProforPowerline-Regular.otf /usr/share/fonts
-# rm -f /root/SourceCodeProforPowerline-Regular.otf
-
-# # cp wallpaper
-# cp -f /root/root.jpg /usr/share/backgrounds/xfce/xfce-teal.jpg
-# cp -f /root/root.png /usr/share/backgrounds/xfce/xfce-verticals.png
-# rm -f /root/root.jpg
-# rm -f /root/root.png
 
 # mnt
 mkdir -p /mnt/sda1
