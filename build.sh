@@ -282,6 +282,8 @@ make_6_iso() {
 
     # embed checksum
     implantisomd5 "${out_dir}/czo-rescue-arch-${iso_mainver//.}.iso"
+    # sha checksum
+    sha512sum "${out_dir}/czo-rescue-arch-${iso_mainver//.}.iso" "${out_dir}/czo-rescue-arch-${iso_mainver//.}.iso.sha512"
 }
 
 if [[ ${EUID} -ne 0 ]]; then
