@@ -22,6 +22,7 @@ sfs_comp="xz"
 sfs_opts="-Xbcj x86 -b 512k -Xdict-size 512k"
 documentation_dir="/usr/share/sysrescue/html"
 buildlog=$work_dir/buildlog.log
+iso_disk_name="czo-rescue-arch-${iso_mainver//.}.iso"
 
 # always in verbose mode
 verbose="-v"
@@ -277,15 +278,16 @@ make_6_iso() {
             cp -vf "$srm" ${work_dir}/iso/${install_dir}/
         done
     )
-    rm -f "${out_dir}/czo-rescue-arch-${iso_mainver//.}.iso"
-    setarch ${arch} mkarchiso ${verbose} -w "${work_dir}" -D "${install_dir}" -L "${iso_label}" -P "${iso_publisher}" -A "${iso_application}" -o "${out_dir}" iso "czo-rescue-arch-${iso_mainver//.}.iso"
+    rm -f "${out_dir}/${iso_disk_name}"
+    setarch ${arch} mkarchiso ${verbose} -w "${work_dir}" -D "${install_dir}" -L "${iso_label}" -P "${iso_publisher}" -A "${iso_application}" -o "${out_dir}" iso "${iso_disk_name}"
 
-    echo '<== Embed checksum'
-    implantisomd5 "${out_dir}/czo-rescue-arch-${iso_mainver//.}.iso"
-
-    echo '<== SHA512 checksum'
-    cd ${out_dir}
-    sha512sum "czo-rescue-arch-${iso_mainver//.}.iso" > "$czo-rescue-arch-${iso_mainver//.}.iso.sha512"
+    (
+        cd ${out_dir}
+        echo '<== Embed checksum'
+        implantisomd5 "${iso_disk_name}"
+        echo '<== SHA512 checksum'
+        sha512sum "${iso_disk_name}" > "${iso_disk_name}.sha512"
+    )
 }
 
 if [[ ${EUID} -ne 0 ]]; then
