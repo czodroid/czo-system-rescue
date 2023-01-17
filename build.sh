@@ -13,15 +13,15 @@ iso_label="RESCUE"
 iso_date="$(date +%Y-%m-%d)"
 iso_publisher="SystemRescue <http://www.system-rescue.org>"
 iso_application="SystemRescue"
-documentation_dir="/usr/share/sysrescue/html"
 install_dir=sysresccd
 work_dir=work
 out_dir=out
-buildlog=$work_dir/buildlog.log
 gpg_key=
 arch="$(uname -m)"
 sfs_comp="xz"
 sfs_opts="-Xbcj x86 -b 512k -Xdict-size 512k"
+documentation_dir="/usr/share/sysrescue/html"
+buildlog=$work_dir/buildlog.log
 
 # always in verbose mode
 verbose="-v"
@@ -279,6 +279,9 @@ make_6_iso() {
     )
     rm -f "${out_dir}/czo-rescue-arch-${iso_mainver//.}.iso"
     setarch ${arch} mkarchiso ${verbose} -w "${work_dir}" -D "${install_dir}" -L "${iso_label}" -P "${iso_publisher}" -A "${iso_application}" -o "${out_dir}" iso "czo-rescue-arch-${iso_mainver//.}.iso"
+
+    # embed checksum
+    implantisomd5 "${out_dir}/czo-rescue-arch-${iso_mainver//.}.iso"
 }
 
 if [[ ${EUID} -ne 0 ]]; then
