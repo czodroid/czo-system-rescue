@@ -84,7 +84,7 @@ run_once() {
 }
 
 # Setup custom pacman.conf + base install + additional package
-make_1_pacman() {
+make_01_pacman() {
 
     echo '<== Setup custom pacman.conf with current cache directories.'
     local _cache_dirs
@@ -100,7 +100,7 @@ make_1_pacman() {
 }
 
 # Customize installation (airootfs) + Offline documentation
-make_2_customize_airootfs() {
+make_02_customize_airootfs() {
 
     echo '<== Offline documentation'
     mkdir -p "${work_dir}/${arch}/airootfs/${documentation_dir}"
@@ -148,7 +148,7 @@ make_2_customize_airootfs() {
 }
 
 # Build initramfs (airootfs) and prepare kernel/initramfs ${install_dir}/boot/
-make_3_mkinitcpio_boot() {
+make_03_mkinitcpio_boot() {
     echo '<== Copy mkinitcpio archiso hooks and build initramfs (airootfs)'
     local _hook
     mkdir -p ${work_dir}/${arch}/airootfs/etc/initcpio/hooks
@@ -206,7 +206,7 @@ make_3_mkinitcpio_boot() {
 }
 
 # Prepare /isolinux and efi
-make_4_isolinux_efi() {
+make_04_isolinux_efi() {
     echo '<== Prepare /isolinux'
     mkdir -p ${work_dir}/iso/isolinux
     sed "s|%INSTALL_DIR%|${install_dir}|g" ${script_path}/isolinux/isolinux.cfg > ${work_dir}/iso/isolinux/isolinux.cfg
@@ -254,7 +254,7 @@ make_4_isolinux_efi() {
 }
 
 # Build airootfs filesystem image
-make_5_image() {
+make_05_image() {
     echo '<== Copy airootfs'
     cp -a -l -f ${work_dir}/${arch}/airootfs ${work_dir}
     echo '<== Pkglist'
@@ -267,7 +267,7 @@ make_5_image() {
 }
 
 # Build ISO
-make_6_iso() {
+make_06_iso() {
     echo '<== Build ISO'
 
     cat << HEREDOC > ${work_dir}/iso/czo-rescue-arch
@@ -329,11 +329,11 @@ mkdir -p ${work_dir}
 rm -f $buildlog
 
 (
-run_once make_1_pacman
-run_once make_2_customize_airootfs
-run_once make_3_mkinitcpio_boot
-run_once make_4_isolinux_efi
-run_once make_5_image
-run_once make_6_iso
+run_once make_01_pacman
+run_once make_02_customize_airootfs
+run_once make_03_mkinitcpio_boot
+run_once make_04_isolinux_efi
+run_once make_05_image
+run_once make_06_iso
 ) 2>&1 | tee -a $buildlog
 
