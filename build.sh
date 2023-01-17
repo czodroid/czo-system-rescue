@@ -283,6 +283,8 @@ make_6_iso() {
 
     (
         cd ${out_dir}
+        echo '<== MD5 checksum'
+        md5sum "${iso_disk_name}"
         echo '<== Embed checksum'
         implantisomd5 "${iso_disk_name}"
         echo '<== SHA512 checksum'
