@@ -11,8 +11,8 @@ iso_mainver="${iso_version%-*}"
 #iso_label="RESCUE${iso_mainver//.}"
 iso_label="RESCUE"
 iso_date="$(date +%Y-%m-%d)"
-iso_publisher="SystemRescue <http://www.system-rescue.org>"
-iso_application="SystemRescue"
+iso_publisher="CzoRescueArch <https://gitlab.com/czo/czo-rescue-arch>"
+iso_application="CzoRescueArch"
 install_dir=sysresccd
 work_dir=work
 out_dir=out
@@ -283,8 +283,6 @@ make_6_iso() {
 
     (
         cd ${out_dir}
-        echo '<== MD5 checksum'
-        md5sum "${iso_disk_name}"
         echo '<== Embed checksum'
         implantisomd5 "${iso_disk_name}"
         echo '<== SHA512 checksum'
