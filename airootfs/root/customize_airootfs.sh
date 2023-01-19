@@ -116,7 +116,6 @@ perl -i -pe 's,^#?X11Forwarding.*,X11Forwarding yes,' /etc/ssh/sshd_config
 # cron czo-motd-czolsb
 cat << 'EOF' > /etc/cron.d/czo-motd-czolsb
 # Filename: czo-email-at-reboot
-
 @reboot      root   /etc/czolsb > /etc/motd 2> /dev/null
 EOF
 chmod 644 /etc/cron.d/czo-motd-czolsb
@@ -127,6 +126,9 @@ mkdir -p /mnt/sdb1
 
 # config files
 cd /root
-wget -qO- http://git.io/JkHdk | sh
+curl -fsSL https://raw.githubusercontent.com/czodroid/dotfiles/master/config-fast-copy | sh
+curl -fsSL https://raw.githubusercontent.com/czodroid/dotfiles/master/config-fast-ssh  | sh
+rm -fr /root/.ssh_fast_*
+
 
 
