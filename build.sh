@@ -328,12 +328,10 @@ done
 mkdir -p ${work_dir}
 rm -f $buildlog
 
-(
 run_once make_01_pacman
 run_once make_02_customize_airootfs
 run_once make_03_mkinitcpio_boot
 run_once make_04_isolinux_efi
 run_once make_05_image
 run_once make_06_iso
-) 2>&1 | tee -a $buildlog
 
