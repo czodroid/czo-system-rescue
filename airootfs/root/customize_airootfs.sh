@@ -100,8 +100,10 @@ sed -i -e '/# ==== BEGIN sysrescuerepo ====/,/# ==== END sysrescuerepo ====/d' /
 /usr/bin/updatedb
 
 # Packages
-pacman -Q > /root/pkg_list_rescue.txt
-expac -H M -s "%-30n %m" | sort -rhk 2 > /root/pkg_size_rescue.txt
+expac -H M -s "%n" | sort > /root/pkg_list_rescue.txt
+expac -H M -s "%n\t%v" | sort > /root/pkg_version_rescue.txt
+
+expac -H M -s "%m\t%n\t%v" | sort -rh > /root/pkg_size_rescue.txt
 
 # Generate HTML version of the manual
 markdown -o usr/share/sysrescue/index.html usr/share/sysrescue/index.md
