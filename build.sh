@@ -11,8 +11,8 @@ iso_mainver="${iso_version%-*}"
 #iso_label="RESCUE${iso_mainver//.}"
 iso_label="RESCUE"
 iso_date="$(date +%Y-%m-%d)"
-iso_publisher="Czo-Rescue-Arch <https://gitlab.com/czo/czo-rescue-arch>"
-iso_application="Czo-Rescue-Arch"
+iso_publisher="Czo-System-Rescue <https://gitlab.com/czo/czo-system-rescue>"
+iso_application="Czo-System-Rescue"
 install_dir=sysresccd
 work_dir=work
 out_dir=out
@@ -22,7 +22,7 @@ sfs_comp="xz"
 sfs_opts="-Xbcj x86 -b 512k -Xdict-size 512k"
 documentation_dir="/usr/share/sysrescue/html"
 buildlog=$work_dir/buildlog.log
-iso_disk_name="czo-rescue-arch-${iso_mainver//.}.iso"
+iso_disk_name="czo-sysrcd-${iso_mainver//.}.iso"
 
 # always in verbose mode
 verbose="-v"
@@ -270,11 +270,11 @@ make_05_image() {
 make_06_iso() {
     echo '<== Build ISO'
 
-    cat << HEREDOC > ${work_dir}/iso/czo-rescue-arch
-Czo Rescue Arch ${iso_version} (${iso_date})
+    cat << HEREDOC > ${work_dir}/iso/czo-system-rescue
+Czo System Rescue ${iso_version} (${iso_date})
 
 --
-https://gitlab.com/czo/czo-rescue-arch
+https://gitlab.com/czo/czo-system-rescue
 
 HEREDOC
 
