@@ -22,7 +22,7 @@ sfs_comp="xz"
 sfs_opts="-Xbcj x86 -b 512k -Xdict-size 512k"
 documentation_dir="/usr/share/sysrescue/html"
 buildlog=$work_dir/buildlog.log
-iso_disk_name="czo-sysrcd-${iso_mainver//.}.iso"
+iso_disk_name="czo-sysrcd-${iso_mainver//.}-beta.iso"
 
 # always in verbose mode
 verbose="-v"
