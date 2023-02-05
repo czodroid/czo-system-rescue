@@ -270,6 +270,10 @@ make_05_image() {
 make_06_iso() {
     echo '<== Build ISO'
 
+    cp -a ${script_path}/mkiso ${work_dir}/iso/mkiso
+
+    cp -a ${work_dir}/iso/sysresccd/pkglist.x86_64.txt ${work_dir}/iso/pkg-czo-system-rescue
+
     cat << HEREDOC > ${work_dir}/iso/czo-system-rescue
 Czo System Rescue ${iso_version} (${iso_date})
 
@@ -279,6 +283,7 @@ https://gitlab.com/czo/czo-system-rescue
 HEREDOC
 
     cp ${version_file} ${work_dir}/iso/${install_dir}/
+
     (
         shopt -s nullglob
         rm -vf ${work_dir}/iso/${install_dir}/*.srm
