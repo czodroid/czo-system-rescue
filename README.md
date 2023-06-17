@@ -10,7 +10,7 @@ Xfce has its whisker menu and its xfce4-xkb plugin. There is also firefox (no-es
 
 It works on amd64.
 
-Version 811 (from 2023) contains kernel/5.15.91-1-lts and zfs/2.1.9-1
+Version 820 (from 2023) contains kernel/6.3.8-arch1-1 and zfs/2.1.12-1
 
 Versions 241 (from 2011) and 492 (from 2017), are based on Gentoo without zfs, but run on x86.
 
